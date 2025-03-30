@@ -136,14 +136,21 @@ systemctl restart exim4
 
 # Finish info
 cat <<EOL
+
+
 ------------------------------------------
+Success!
 - See SMTP passwords (third column) in /etc/exim4/passwd (`common` user already added)
-- Add new SMTP password with /usr/share/doc/exim4-base/examples/exim-adduser
+- Add new SMTP password (if needed) with /usr/share/doc/exim4-base/examples/exim-adduser
+
+Configure your DNS server:
 - Set DKIM record, see /etc/exim4/dkim/platform.txt for DKIM parameters for domain
 - Set SPF record: name: - (on domain itself) type: TXT, TTL 3600 data: "v=spf1 ip4:YOUR_SERVER_IP/32 a mx ~all"
 - Set DMARC record: name: "_dmarc" type: TXT TTL: 3600 data: "v=DMARC1; p=none; pct=100; adkim=s; aspf=s"
 - Set PTR record on your server IP to domain $1
 - Ensure you have any MX record (or add a record name:@ type:MX data:$1)
-- To test message send: swaks --to YOUR_EMAIL --server 127.0.0.1:465 --tls --auth
+
+How to test:
+- swaks --to YOUR_EMAIL --server 127.0.0.1:465 --tls --auth
 - Or: use test_mail.py
 EOL
