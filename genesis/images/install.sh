@@ -24,3 +24,7 @@ set -o pipefail
 
 apt-get update
 apt-get install -y exim4 opendkim-tools whois swaks
+
+mkdir -p /var/log/exim4/
+chown Debian-exim:Debian-exim /var/log/exim4/
+chmod 770 /var/log/exim4/

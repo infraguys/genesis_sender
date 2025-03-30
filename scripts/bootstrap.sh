@@ -90,7 +90,7 @@ chmod 640 /etc/exim4/dkim/*
 cat > /etc/exim4/conf.d/transport/01_platform <<EOL
 DKIM_CANON = relaxed
 DKIM_DOMAIN = $1
-DKIM_PRIVATE_KEY = /etc/exim4/dkim/platfrom.private
+DKIM_PRIVATE_KEY = /etc/exim4/dkim/platform.private
 DKIM_SELECTOR = platform
 EOL
 
@@ -143,6 +143,7 @@ cat <<EOL
 - Set SPF record: name: - (on domain itself) type: TXT, TTL 3600 data: "v=spf1 ip4:YOUR_SERVER_IP/32 a mx ~all"
 - Set DMARC record: name: "_dmarc" type: TXT TTL: 3600 data: "v=DMARC1; p=none; pct=100; adkim=s; aspf=s"
 - Set PTR record on your server IP to domain $1
+- Ensure you have any MX record (or add a record name:@ type:MX data:$1)
 - To test message send: swaks --to YOUR_EMAIL --server 127.0.0.1:465 --tls --auth
 - Or: use test_mail.py
 EOL
