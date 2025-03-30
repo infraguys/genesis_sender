@@ -1,0 +1,28 @@
+# Build section. It specifies the build process of the project
+build:
+
+  # Dependencies of the project
+  deps:
+      # Target path in the image
+    - dst: /opt/genesis_sender
+      # Local path
+      path:
+        src: ../../genesis_sender
+
+  # List of elements in the project
+  elements:
+    # List of images in the element
+    - images:
+      - name: genesis-sender
+        format: raw
+
+        # OS profile for the image
+        profile: genesis_base
+
+        # Provisioning script
+        script: images/install.sh
+      # manifest: manifests/genesis-core.yaml
+
+        override:
+          disk_size: "10G"
+          memory: 2048
